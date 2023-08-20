@@ -1,0 +1,227 @@
+[
+  {
+    "studentName": "John Doe",
+    "grade": "JSS 1",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Jane Smith",
+    "grade": "JSS 2",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Michael Johnson",
+    "grade": "JSS 3",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Emily Williams",
+    "grade": "SSS 1",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Daniel Brown",
+    "grade": "SSS 2",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Sophia Davis",
+    "grade": "JSS 1",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Liam Martinez",
+    "grade": "JSS 2",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Olivia Wilson",
+    "grade": "JSS 3",
+    "classroom": "D"
+  },
+  {
+    "studentName": "William Taylor",
+    "grade": "SSS 1",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Ava Anderson",
+    "grade": "SSS 2",
+    "classroom": "B"
+  },
+  {
+    "studentName": "James Thomas",
+    "grade": "JSS 1",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Isabella Johnson",
+    "grade": "JSS 2",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Benjamin White",
+    "grade": "JSS 3",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Mia Martinez",
+    "grade": "SSS 1",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Logan Miller",
+    "grade": "SSS 2",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Emma Davis",
+    "grade": "JSS 1",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Alexander Wilson",
+    "grade": "JSS 2",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Oliver Brown",
+    "grade": "JSS 3",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Ava Garcia",
+    "grade": "SSS 1",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Ethan Johnson",
+    "grade": "SSS 2",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Lily Thomas",
+    "grade": "JSS 1",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Lucas Martinez",
+    "grade": "JSS 2",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Sofia Harris",
+    "grade": "JSS 3",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Jackson Smith",
+    "grade": "SSS 1",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Avery Johnson",
+    "grade": "SSS 2",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Sebastian Davis",
+    "grade": "JSS 1",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Harper Wilson",
+    "grade": "JSS 2",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Muhammad Thompson",
+    "grade": "JSS 3",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Evelyn Garcia",
+    "grade": "SSS 1",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Aiden Johnson",
+    "grade": "SSS 2",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Aria Thomas",
+    "grade": "JSS 1",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Grayson Martinez",
+    "grade": "JSS 2",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Scarlett Harris",
+    "grade": "JSS 3",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Levi Smith",
+    "grade": "SSS 1",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Victoria Johnson",
+    "grade": "SSS 2",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Jackson Davis",
+    "grade": "JSS 1",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Madison Wilson",
+    "grade": "JSS 2",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Samuel Brown",
+    "grade": "JSS 3",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Luna Garcia",
+    "grade": "SSS 1",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Elijah Johnson",
+    "grade": "SSS 2",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Penelope Thomas",
+    "grade": "JSS 1",
+    "classroom": "A"
+  },
+  {
+    "studentName": "Mateo Martinez",
+    "grade": "JSS 2",
+    "classroom": "B"
+  },
+  {
+    "studentName": "Grace Harris",
+    "grade": "JSS 3",
+    "classroom": "C"
+  },
+  {
+    "studentName": "Daniel Smith",
+    "grade": "SSS 1",
+    "classroom": "D"
+  },
+  {
+    "studentName": "Ariana Johnson",
+    "grade": "SSS 2",
+    "classroom": "A"
+  }
+]

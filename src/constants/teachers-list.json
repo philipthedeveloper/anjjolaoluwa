@@ -1,0 +1,122 @@
+[
+  {
+    "name": "John Smith",
+    "subject": "English",
+    "yearsOfExperience": 8,
+    "grade": "SSS 2"
+  },
+  {
+    "name": "Emily Johnson",
+    "subject": "Mathematics",
+    "yearsOfExperience": 5,
+    "grade": "JSS 3"
+  },
+  {
+    "name": "Michael Williams",
+    "subject": "Physics",
+    "yearsOfExperience": 10,
+    "grade": "SSS 1"
+  },
+  {
+    "name": "Sarah Brown",
+    "subject": "Chemistry",
+    "yearsOfExperience": 6,
+    "grade": "JSS 2"
+  },
+  {
+    "name": "David Davis",
+    "subject": "Biology",
+    "yearsOfExperience": 9,
+    "grade": "SSS 3"
+  },
+  {
+    "name": "Laura Martinez",
+    "subject": "Agric. Science",
+    "yearsOfExperience": 3,
+    "grade": "JSS 1"
+  },
+  {
+    "name": "Daniel White",
+    "subject": "Social Studies",
+    "yearsOfExperience": 7,
+    "grade": "SSS 2"
+  },
+  {
+    "name": "Jennifer Wilson",
+    "subject": "History",
+    "yearsOfExperience": 4,
+    "grade": "JSS 3"
+  },
+  {
+    "name": "Robert Harris",
+    "subject": "Geography",
+    "yearsOfExperience": 6,
+    "grade": "SSS 1"
+  },
+  {
+    "name": "Mary Turner",
+    "subject": "Economics",
+    "yearsOfExperience": 11,
+    "grade": "JSS 2"
+  },
+  {
+    "name": "James Taylor",
+    "subject": "Computer Science",
+    "yearsOfExperience": 8,
+    "grade": "SSS 3"
+  },
+  {
+    "name": "Olivia Adams",
+    "subject": "Physical Education",
+    "yearsOfExperience": 5,
+    "grade": "JSS 1"
+  },
+  {
+    "name": "Matthew Clark",
+    "subject": "Music",
+    "yearsOfExperience": 4,
+    "grade": "SSS 2"
+  },
+  {
+    "name": "Sophia Evans",
+    "subject": "Art",
+    "yearsOfExperience": 7,
+    "grade": "JSS 3"
+  },
+  {
+    "name": "William Scott",
+    "subject": "Foreign Language",
+    "yearsOfExperience": 9,
+    "grade": "SSS 1"
+  },
+  {
+    "name": "Emma Phillips",
+    "subject": "Drama",
+    "yearsOfExperience": 2,
+    "grade": "JSS 2"
+  },
+  {
+    "name": "Aiden Baker",
+    "subject": "Political Science",
+    "yearsOfExperience": 10,
+    "grade": "SSS 3"
+  },
+  {
+    "name": "Chloe Lopez",
+    "subject": "Psychology",
+    "yearsOfExperience": 6,
+    "grade": "JSS 1"
+  },
+  {
+    "name": "Lucas Reed",
+    "subject": "Sociology",
+    "yearsOfExperience": 3,
+    "grade": "SSS 2"
+  },
+  {
+    "name": "Ava Stewart",
+    "subject": "Philosophy",
+    "yearsOfExperience": 12,
+    "grade": "JSS 3"
+  }
+]

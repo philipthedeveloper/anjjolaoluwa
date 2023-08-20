@@ -1,0 +1,188 @@
+[
+  {
+    "date": "01-08-2023",
+    "subject": "English",
+    "totalPresent": 85,
+    "totalAbsent": 15
+  },
+  {
+    "date": "02-08-2023",
+    "subject": "Mathematics",
+    "totalPresent": 90,
+    "totalAbsent": 10
+  },
+  {
+    "date": "03-08-2023",
+    "subject": "Physics",
+    "totalPresent": 78,
+    "totalAbsent": 22
+  },
+  {
+    "date": "04-08-2023",
+    "subject": "Chemistry",
+    "totalPresent": 88,
+    "totalAbsent": 12
+  },
+  {
+    "date": "05-08-2023",
+    "subject": "Biology",
+    "totalPresent": 82,
+    "totalAbsent": 18
+  },
+  {
+    "date": "06-08-2023",
+    "subject": "Agric. Science",
+    "totalPresent": 70,
+    "totalAbsent": 30
+  },
+  {
+    "date": "07-08-2023",
+    "subject": "Social Studies",
+    "totalPresent": 95,
+    "totalAbsent": 5
+  },
+  {
+    "date": "08-08-2023",
+    "subject": "English",
+    "totalPresent": 88,
+    "totalAbsent": 12
+  },
+  {
+    "date": "09-08-2023",
+    "subject": "Mathematics",
+    "totalPresent": 75,
+    "totalAbsent": 25
+  },
+  {
+    "date": "10-08-2023",
+    "subject": "Physics",
+    "totalPresent": 92,
+    "totalAbsent": 8
+  },
+  {
+    "date": "11-08-2023",
+    "subject": "Chemistry",
+    "totalPresent": 80,
+    "totalAbsent": 20
+  },
+  {
+    "date": "12-08-2023",
+    "subject": "Biology",
+    "totalPresent": 86,
+    "totalAbsent": 14
+  },
+  {
+    "date": "13-08-2023",
+    "subject": "Agric. Science",
+    "totalPresent": 68,
+    "totalAbsent": 32
+  },
+  {
+    "date": "14-08-2023",
+    "subject": "Social Studies",
+    "totalPresent": 97,
+    "totalAbsent": 3
+  },
+  {
+    "date": "15-08-2023",
+    "subject": "English",
+    "totalPresent": 90,
+    "totalAbsent": 10
+  },
+  {
+    "date": "16-08-2023",
+    "subject": "Mathematics",
+    "totalPresent": 77,
+    "totalAbsent": 23
+  },
+  {
+    "date": "17-08-2023",
+    "subject": "Physics",
+    "totalPresent": 89,
+    "totalAbsent": 11
+  },
+  {
+    "date": "18-08-2023",
+    "subject": "Chemistry",
+    "totalPresent": 83,
+    "totalAbsent": 17
+  },
+  {
+    "date": "19-08-2023",
+    "subject": "Biology",
+    "totalPresent": 79,
+    "totalAbsent": 21
+  },
+  {
+    "date": "20-08-2023",
+    "subject": "Agric. Science",
+    "totalPresent": 72,
+    "totalAbsent": 28
+  },
+  {
+    "date": "21-08-2023",
+    "subject": "Social Studies",
+    "totalPresent": 96,
+    "totalAbsent": 4
+  },
+  {
+    "date": "22-08-2023",
+    "subject": "English",
+    "totalPresent": 87,
+    "totalAbsent": 13
+  },
+  {
+    "date": "23-08-2023",
+    "subject": "Mathematics",
+    "totalPresent": 71,
+    "totalAbsent": 29
+  },
+  {
+    "date": "24-08-2023",
+    "subject": "Physics",
+    "totalPresent": 91,
+    "totalAbsent": 9
+  },
+  {
+    "date": "25-08-2023",
+    "subject": "Chemistry",
+    "totalPresent": 84,
+    "totalAbsent": 16
+  },
+  {
+    "date": "26-08-2023",
+    "subject": "Biology",
+    "totalPresent": 81,
+    "totalAbsent": 19
+  },
+  {
+    "date": "27-08-2023",
+    "subject": "Agric. Science",
+    "totalPresent": 74,
+    "totalAbsent": 26
+  },
+  {
+    "date": "28-08-2023",
+    "subject": "Social Studies",
+    "totalPresent": 98,
+    "totalAbsent": 2
+  },
+  {
+    "date": "29-08-2023",
+    "subject": "English",
+    "totalPresent": 89,
+    "totalAbsent": 11
+  },
+  {
+    "date": "30-08-2023",
+    "subject": "Mathematics",
+    "totalPresent": 76,
+    "totalAbsent": 24
+  },
+  {
+    "date": "31-08-2023",
+    "subject": "Physics",
+    "totalPresent": 93,
+    "totalAbsent": 7
+  }
+]
