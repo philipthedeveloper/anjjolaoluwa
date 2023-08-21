@@ -2,32 +2,44 @@ import React from "react";
 import styled from "styled-components";
 import { Heading, PageContainer } from "../components/reusable";
 import students_list from "../constants/student-list.json";
+import useFetch from "../hooks/useFetch";
+import { Spinner } from "../components/reusable";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Students = () => {
+  const { pending, error, data } = useFetch(`${BASE_URL}/student`);
+
   return (
     <PageContainer>
       <Heading>Students</Heading>
-      <StudentsTableContainer>
-        <StudentsTableLayout>
-          <StudentsTableColumnLayout style={{ position: "sticky", top: 0 }}>
-            <TableHeading>Name</TableHeading>
-            <TableHeading>Classroom</TableHeading>
-            <TableHeading>Grade</TableHeading>
-          </StudentsTableColumnLayout>
-          {students_list.map(({ studentName, grade, classroom }) => (
-            <StudentsTableColumnLayout>
-              <TableData>{studentName}</TableData>
-              <TableData>{classroom}</TableData>
-              <TableData>{grade}</TableData>
-            </StudentsTableColumnLayout>
-          ))}
-          {/* <StudentsTableColumnLayout>
+      {pending ? (
+        <Spinner size={"EXTRA-SMALL"} />
+      ) : (
+        <StudentsTableContainer>
+          {!error && (
+            <StudentsTableLayout>
+              <StudentsTableColumnLayout style={{ position: "sticky", top: 0 }}>
+                <TableHeading>Name</TableHeading>
+                <TableHeading>Classroom</TableHeading>
+                <TableHeading>Grade</TableHeading>
+              </StudentsTableColumnLayout>
+              {data.records.map(({ studentName, grade, classroom, _id }) => (
+                <StudentsTableColumnLayout data-id={_id}>
+                  <TableData>{studentName}</TableData>
+                  <TableData>{classroom}</TableData>
+                  <TableData>{grade}</TableData>
+                </StudentsTableColumnLayout>
+              ))}
+              {/* <StudentsTableColumnLayout>
             <TableData>John Doe</TableData>
             <TableData>NLT-A</TableData>
             <TableData>100 LEVEL</TableData>
           </StudentsTableColumnLayout> */}
-        </StudentsTableLayout>
-      </StudentsTableContainer>
+            </StudentsTableLayout>
+          )}
+        </StudentsTableContainer>
+      )}
     </PageContainer>
   );
 };
