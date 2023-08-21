@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Heading, PageContainer } from "../components/resuable";
+import { Heading, PageContainer } from "../components/reusable";
 import chat from "../constants/chat-data.json";
 import avatar from "../assets/avatar.png";
 

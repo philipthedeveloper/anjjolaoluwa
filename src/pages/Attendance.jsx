@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Heading, PageContainer } from "../components/resuable";
+import { Heading, PageContainer } from "../components/reusable";
 import attendance_list from "../constants/attendance-list.json";
 
 const Attendance = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Heading, PageContainer } from "../components/resuable";
+import { Heading, PageContainer } from "../components/reusable";
 import teachers_list from "../constants/teachers-list.json";
 
 const Teachers = () => {

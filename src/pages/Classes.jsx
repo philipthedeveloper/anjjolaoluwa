@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { Heading, PageContainer } from "../components/resuable";
+import { Heading, PageContainer } from "../components/reusable";
 import attendance_list from "../constants/attendance-list.json";
 import students_list from "../constants/student-list.json";
 

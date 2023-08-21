@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import background from "../assets/login-background.png";
 import techULogo from "../assets/tech-u-logo.png";
-import { FormGroupComponent } from "../components/resuable";
+import { FormGroupComponent } from "../components/reusable";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

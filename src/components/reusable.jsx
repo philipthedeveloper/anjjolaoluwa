@@ -111,3 +111,38 @@ export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+import loadingGif from "../assets/loading-gif.gif";
+
+const dimensions = {
+  "EXTRA-SMALL": "50px",
+  SMALL: "70px",
+  MEDIUM: "100px",
+  LARGE: "120px",
+  "EXTRA-LARGE": "150px",
+};
+
+export const Spinner = ({ size = "MEDIUM" }) => {
+  console.log(size);
+  return (
+    <SpinnerContainer>
+      <SpinnerImage src={loadingGif} size={size} />
+    </SpinnerContainer>
+  );
+};
+
+const SpinnerContainer = styled.div`
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SpinnerImage = styled.img`
+  width: ${(props) => dimensions[props.size]};
+  aspect-ratio: 1;
+  object-fit: contain;
+`;
