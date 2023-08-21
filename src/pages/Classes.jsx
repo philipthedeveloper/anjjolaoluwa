@@ -4,7 +4,14 @@ import { Heading, PageContainer } from "../components/reusable";
 import attendance_list from "../constants/attendance-list.json";
 import students_list from "../constants/student-list.json";
 
+import { Spinner } from "../components/reusable";
+import useFetch from "../hooks/useFetch";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const Classes = () => {
+  const { pending, error, data } = useFetch(`${BASE_URL}/student`);
+
   const [classes, setClasses] = useState({
     "JSS 1": [],
     "JSS 2": [],
@@ -18,11 +25,14 @@ const Classes = () => {
   ]);
 
   useEffect(() => {
+    if (!data) return;
     setClasses((prev) => {
       let clone = { ...prev };
-      let count = 0;
-      students_list.forEach((student) => {
-        clone[student.grade].push({ name: student.studentName });
+      data.records.forEach((student) => {
+        clone[student.grade].push({
+          name: student.studentName,
+          _id: student._id,
+        });
       });
       let Keys = Object.keys(clone);
       Keys.forEach((key) => {
@@ -33,7 +43,7 @@ const Classes = () => {
       });
       return clone;
     });
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     if (maximum.count !== 0) {
@@ -44,7 +54,12 @@ const Classes = () => {
         let newColumnLayout = (
           <ClassesTableColumnLayout key={Math.random().toString()}>
             {classKeys.map((key) => (
-              <TableData>{classes[key][i]?.name}</TableData>
+              <TableData
+                data-id={classes[key][i]?._id}
+                key={classes[key][i]?._id}
+              >
+                {classes[key][i]?.name}
+              </TableData>
             ))}
           </ClassesTableColumnLayout>
         );
@@ -57,17 +72,21 @@ const Classes = () => {
   return (
     <PageContainer>
       <Heading>Classes</Heading>
-      <ClassesTableContainer>
-        <ClassesTableLayout>
-          <ClassesTableColumnLayout style={{ position: "sticky", top: 0 }}>
-            <TableHeading>JSS 1</TableHeading>
-            <TableHeading>JSS 2</TableHeading>
-            <TableHeading>JSS 3</TableHeading>
-            <TableHeading>SSS 1</TableHeading>
-            <TableHeading>SSS 2</TableHeading>
-          </ClassesTableColumnLayout>
-          {Render}
-          {/* {attendance_list.map(
+      {pending ? (
+        <Spinner size={"EXTRA-SMALL"} />
+      ) : (
+        <ClassesTableContainer>
+          {!error && (
+            <ClassesTableLayout>
+              <ClassesTableColumnLayout style={{ position: "sticky", top: 0 }}>
+                <TableHeading>JSS 1</TableHeading>
+                <TableHeading>JSS 2</TableHeading>
+                <TableHeading>JSS 3</TableHeading>
+                <TableHeading>SSS 1</TableHeading>
+                <TableHeading>SSS 2</TableHeading>
+              </ClassesTableColumnLayout>
+              {Render}
+              {/* {attendance_list.map(
             ({ date, subject, totalPresent, totalAbsent }) => (
               <ClassesTableColumnLayout>
                 <TableData>{date}</TableData>
@@ -77,8 +96,10 @@ const Classes = () => {
               </ClassesTableColumnLayout>
             )
           )} */}
-        </ClassesTableLayout>
-      </ClassesTableContainer>
+            </ClassesTableLayout>
+          )}
+        </ClassesTableContainer>
+      )}
     </PageContainer>
   );
 };
