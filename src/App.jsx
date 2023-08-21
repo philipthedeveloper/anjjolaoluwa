@@ -3,14 +3,30 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Router from "./routes/Router";
 import styled from "styled-components";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
-    <AppContainer>
-      <Router />
-      {/* <Login /> */}
-      {/* <Dashboard /> */}
-    </AppContainer>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <AppContainer>
+        <Router />
+        {/* <Login /> */}
+        {/* <Dashboard /> */}
+      </AppContainer>
+    </>
   );
 };
 
