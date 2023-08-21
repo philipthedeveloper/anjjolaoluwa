@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useRouterContext } from "../context/RouteContext";
 
 const routes = [
   {
@@ -51,6 +52,7 @@ const routes = [
 ];
 
 const SideNav = () => {
+  const { currentPath } = useRouterContext();
   return (
     <SideNavContainer>
       <Header>
@@ -58,7 +60,11 @@ const SideNav = () => {
       </Header>
       <NavList>
         {routes.map(({ path, name, Icon }) => (
-          <LinkItem to={path}>
+          <LinkItem
+            to={path}
+            key={path + name}
+            className={`${currentPath.includes(path) && "active"}`}
+          >
             {Icon}
             {name}
           </LinkItem>
@@ -99,6 +105,10 @@ const LinkItem = styled(Link)`
   gap: 1rem;
 
   &:hover {
+    background: var(--light-secondary-color);
+  }
+
+  &.active {
     background: var(--light-secondary-color);
   }
 `;
