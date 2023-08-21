@@ -7,6 +7,8 @@ import staffsIcon from "../assets/staffs.svg";
 import studentStat from "../assets/students-stat.png";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import useFetch from "../hooks/useFetch";
+import { Spinner } from "./reusable";
 
 const cardData = [
   {
@@ -44,44 +46,59 @@ const footerData = [
   },
 ];
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const MainDashboard = () => {
   const [value, setValue] = useState(() => new Date());
+  const { pending, error, data } = useFetch(`${BASE_URL}/general/count`);
 
   return (
     <DashboardContainer>
       <Heading>Dashboard</Heading>
-      <DashboardHeadingCardContainer>
-        {cardData.map(({ title, count, imgUrl }) => (
-          <DashboardHeadingCard>
-            <HeadingCardIconContainer>
-              <HeadingCardIcon src={imgUrl} />
-            </HeadingCardIconContainer>
-            <HeadingCardDetailsContainer>
-              <HeadingCardTitle>{title}</HeadingCardTitle>
-              <HeadingCardCount>{count}</HeadingCardCount>
-            </HeadingCardDetailsContainer>
-          </DashboardHeadingCard>
-        ))}
-      </DashboardHeadingCardContainer>
-      <MainSectionContainer>
-        <MainSectionLayoutContainer>
-          <StudentStatisticsContainer>
-            <SectionHeading>Students</SectionHeading>
-            <StudentStatGraphContainer>
-              <StudentStatGraph src={studentStat} />
-            </StudentStatGraphContainer>
-            <StudentStatFooter>
-              {footerData.map((data) => (
-                <FooterComp {...data} />
-              ))}
-            </StudentStatFooter>
-          </StudentStatisticsContainer>
-          <EventCalenderContainer>
-            <SectionHeading>Event Calender</SectionHeading>
-            <Calendar value={value} onChange={setValue} />
-          </EventCalenderContainer>
-        </MainSectionLayoutContainer>
-      </MainSectionContainer>
+      {pending ? (
+        <Spinner size={"EXTRA-SMALL"} />
+      ) : (
+        <>
+          <DashboardHeadingCardContainer>
+            {cardData.map(({ title, count, imgUrl }) => (
+              <DashboardHeadingCard key={title + count + imgUrl}>
+                <HeadingCardIconContainer>
+                  <HeadingCardIcon src={imgUrl} />
+                </HeadingCardIconContainer>
+                <HeadingCardDetailsContainer>
+                  <HeadingCardTitle>{title}</HeadingCardTitle>
+                  <HeadingCardCount>
+                    {title === "Total students"
+                      ? data?.students
+                      : title === "Total teachers"
+                      ? data?.teachers
+                      : count}
+                  </HeadingCardCount>
+                </HeadingCardDetailsContainer>
+              </DashboardHeadingCard>
+            ))}
+          </DashboardHeadingCardContainer>
+          <MainSectionContainer>
+            <MainSectionLayoutContainer>
+              <StudentStatisticsContainer>
+                <SectionHeading>Students</SectionHeading>
+                <StudentStatGraphContainer>
+                  <StudentStatGraph src={studentStat} />
+                </StudentStatGraphContainer>
+                <StudentStatFooter>
+                  {footerData.map((data) => (
+                    <FooterComp {...data} key={Object.values(data).join(",")} />
+                  ))}
+                </StudentStatFooter>
+              </StudentStatisticsContainer>
+              <EventCalenderContainer>
+                <SectionHeading>Event Calender</SectionHeading>
+                <Calendar value={value} onChange={setValue} />
+              </EventCalenderContainer>
+            </MainSectionLayoutContainer>
+          </MainSectionContainer>
+        </>
+      )}
     </DashboardContainer>
   );
 };
