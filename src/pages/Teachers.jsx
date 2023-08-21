@@ -2,29 +2,43 @@ import React from "react";
 import styled from "styled-components";
 import { Heading, PageContainer } from "../components/reusable";
 import teachers_list from "../constants/teachers-list.json";
+import { Spinner } from "../components/reusable";
+import useFetch from "../hooks/useFetch";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Teachers = () => {
+  const { pending, error, data } = useFetch(`${BASE_URL}/teacher`);
+
   return (
     <PageContainer>
       <Heading>Teachers</Heading>
-      <TeachersTableContainer>
-        <TeachersTableLayout>
-          <TeachersTableColumnLayout style={{ position: "sticky", top: 0 }}>
-            <TableHeading>Name</TableHeading>
-            <TableHeading>Subject Taken</TableHeading>
-            <TableHeading>Grade</TableHeading>
-            <TableHeading>Years of Experience</TableHeading>
-          </TeachersTableColumnLayout>
-          {teachers_list.map(({ name, subject, grade, yearsOfExperience }) => (
-            <TeachersTableColumnLayout>
-              <TableData>{name}</TableData>
-              <TableData>{subject}</TableData>
-              <TableData>{grade}</TableData>
-              <TableData>{yearsOfExperience}</TableData>
-            </TeachersTableColumnLayout>
-          ))}
-        </TeachersTableLayout>
-      </TeachersTableContainer>
+      {pending ? (
+        <Spinner size={"EXTRA-SMALL"} />
+      ) : (
+        <TeachersTableContainer>
+          {!error && (
+            <TeachersTableLayout>
+              <TeachersTableColumnLayout style={{ position: "sticky", top: 0 }}>
+                <TableHeading>Name</TableHeading>
+                <TableHeading>Subject Taken</TableHeading>
+                <TableHeading>Grade</TableHeading>
+                <TableHeading>Years of Experience</TableHeading>
+              </TeachersTableColumnLayout>
+              {teachers_list.map(
+                ({ name, subject, grade, yearsOfExperience, _id }) => (
+                  <TeachersTableColumnLayout data-id={_id}>
+                    <TableData>{name}</TableData>
+                    <TableData>{subject}</TableData>
+                    <TableData>{grade}</TableData>
+                    <TableData>{yearsOfExperience}</TableData>
+                  </TeachersTableColumnLayout>
+                )
+              )}
+            </TeachersTableLayout>
+          )}
+        </TeachersTableContainer>
+      )}
     </PageContainer>
   );
 };
