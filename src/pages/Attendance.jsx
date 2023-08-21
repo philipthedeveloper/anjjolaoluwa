@@ -2,31 +2,45 @@ import React from "react";
 import styled from "styled-components";
 import { Heading, PageContainer } from "../components/reusable";
 import attendance_list from "../constants/attendance-list.json";
+import { Spinner } from "../components/reusable";
+import useFetch from "../hooks/useFetch";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Attendance = () => {
+  const { pending, error, data } = useFetch(`${BASE_URL}/attendance`);
+
   return (
     <PageContainer>
       <Heading>Attendance</Heading>
-      <AttendanceTableContainer>
-        <AttendanceTableLayout>
-          <AttendanceTableColumnLayout style={{ position: "sticky", top: 0 }}>
-            <TableHeading>Date</TableHeading>
-            <TableHeading>Subject</TableHeading>
-            <TableHeading>Total Present</TableHeading>
-            <TableHeading>Total Absent</TableHeading>
-          </AttendanceTableColumnLayout>
-          {attendance_list.map(
-            ({ date, subject, totalPresent, totalAbsent }) => (
-              <AttendanceTableColumnLayout>
-                <TableData>{date}</TableData>
-                <TableData>{subject}</TableData>
-                <TableData>{totalPresent}</TableData>
-                <TableData>{totalAbsent}</TableData>
+      {pending ? (
+        <Spinner size={"EXTRA-SMALL"} />
+      ) : (
+        <AttendanceTableContainer>
+          {!error && (
+            <AttendanceTableLayout>
+              <AttendanceTableColumnLayout
+                style={{ position: "sticky", top: 0 }}
+              >
+                <TableHeading>Date</TableHeading>
+                <TableHeading>Subject</TableHeading>
+                <TableHeading>Total Present</TableHeading>
+                <TableHeading>Total Absent</TableHeading>
               </AttendanceTableColumnLayout>
-            )
+              {data.records.map(
+                ({ date, subject, totalPresent, totalAbsent, _id }) => (
+                  <AttendanceTableColumnLayout data-id={_id}>
+                    <TableData>{date}</TableData>
+                    <TableData>{subject}</TableData>
+                    <TableData>{totalPresent}</TableData>
+                    <TableData>{totalAbsent}</TableData>
+                  </AttendanceTableColumnLayout>
+                )
+              )}
+            </AttendanceTableLayout>
           )}
-        </AttendanceTableLayout>
-      </AttendanceTableContainer>
+        </AttendanceTableContainer>
+      )}
     </PageContainer>
   );
 };
