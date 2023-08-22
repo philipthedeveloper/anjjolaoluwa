@@ -1,51 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 import { Heading, PageContainer } from "../components/reusable";
-import attendance_list from "../constants/attendance-list.json";
-import { Spinner } from "../components/reusable";
+import students_list from "../constants/student-list.json";
 import useFetch from "../hooks/useFetch";
+import { Spinner } from "../components/reusable";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-const Attendance = () => {
-  const { pending, error, data } = useFetch(`${BASE_URL}/attendance`);
-
+const Subject = () => {
+  const { pending, error, data } = useFetch(`${BASE_URL}/teacher`);
   return (
     <PageContainer>
-      <Heading>Attendance</Heading>
+      <Heading>Subjects</Heading>
       {pending ? (
         <Spinner size={"EXTRA-SMALL"} />
       ) : (
-        <AttendanceTableContainer>
+        <SubjectTableContainer>
           {!error && (
-            <AttendanceTableLayout>
-              <AttendanceTableColumnLayout
-                style={{ position: "sticky", top: 0 }}
-              >
-                <TableHeading>Date</TableHeading>
+            <SubjectTableLayout>
+              <SubjectTableColumnLayout style={{ position: "sticky", top: 0 }}>
                 <TableHeading>Subject</TableHeading>
-                <TableHeading>Total Present</TableHeading>
-                <TableHeading>Total Absent</TableHeading>
-              </AttendanceTableColumnLayout>
+                <TableHeading>Teacher</TableHeading>
+              </SubjectTableColumnLayout>
               {data.records.map(
-                ({ date, subject, totalPresent, totalAbsent, _id }) => (
-                  <AttendanceTableColumnLayout data-id={_id}>
-                    <TableData>{date}</TableData>
+                ({ name, subject, grade, yearsOfExperience, _id }) => (
+                  <SubjectTableColumnLayout data-id={_id}>
                     <TableData>{subject}</TableData>
-                    <TableData>{totalPresent}</TableData>
-                    <TableData>{totalAbsent}</TableData>
-                  </AttendanceTableColumnLayout>
+                    <TableData>{name}</TableData>
+                  </SubjectTableColumnLayout>
                 )
               )}
-            </AttendanceTableLayout>
+            </SubjectTableLayout>
           )}
-        </AttendanceTableContainer>
+        </SubjectTableContainer>
       )}
     </PageContainer>
   );
 };
 
-const AttendanceTableContainer = styled.div`
+const SubjectTableContainer = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -53,7 +46,7 @@ const AttendanceTableContainer = styled.div`
   border: 2px solid var(--semi-white);
 `;
 
-const AttendanceTableLayout = styled.div`
+const SubjectTableLayout = styled.div`
   display: grid;
   grid-template-rows: max-content;
   grid-auto-rows: max-content;
@@ -63,9 +56,10 @@ const AttendanceTableLayout = styled.div`
   overflow: auto;
 `;
 
-const AttendanceTableColumnLayout = styled.div`
+const SubjectTableColumnLayout = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+
   &:not(:last-child) {
     border-bottom: 2px solid var(--semi-white);
   }
@@ -102,4 +96,4 @@ const TableData = styled.p`
     border-right: 2px solid var(--semi-white);
   }
 `;
-export default Attendance;
+export default Subject;

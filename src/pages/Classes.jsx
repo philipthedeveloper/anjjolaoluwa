@@ -134,6 +134,7 @@ const TableHeading = styled.h3`
   padding: 1rem;
   text-align: center;
   background: var(--semi-white);
+  min-width: 120px;
 
   &:first-child {
     text-align: left;
@@ -150,6 +151,7 @@ const TableData = styled.p`
   background: var(--background-white);
   text-transform: capitalize;
   font-size: 0.85rem;
+  min-width: 120px;
 
   &:first-child {
     text-align: left;

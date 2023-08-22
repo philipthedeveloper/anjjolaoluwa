@@ -93,7 +93,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   padding: 0.7rem 1rem;
-  background-color: var(--semi-white);
+  background-color: var(--background-white);
   width: 100%;
 `;
 const Label = styled.label`
@@ -110,6 +110,8 @@ export const PageContainer = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  width: 100%;
 `;
 
 import loadingGif from "../assets/loading-gif.gif";
@@ -122,10 +124,9 @@ const dimensions = {
   "EXTRA-LARGE": "150px",
 };
 
-export const Spinner = ({ size = "MEDIUM" }) => {
-  console.log(size);
+export const Spinner = ({ size = "MEDIUM", style }) => {
   return (
-    <SpinnerContainer>
+    <SpinnerContainer style={style}>
       <SpinnerImage src={loadingGif} size={size} />
     </SpinnerContainer>
   );

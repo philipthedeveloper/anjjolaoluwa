@@ -25,7 +25,7 @@ const Teachers = () => {
                 <TableHeading>Grade</TableHeading>
                 <TableHeading>Years of Experience</TableHeading>
               </TeachersTableColumnLayout>
-              {teachers_list.map(
+              {data.records.map(
                 ({ name, subject, grade, yearsOfExperience, _id }) => (
                   <TeachersTableColumnLayout data-id={_id}>
                     <TableData>{name}</TableData>
@@ -73,6 +73,7 @@ const TableHeading = styled.h3`
   padding: 1rem;
   text-align: center;
   background: var(--semi-white);
+  min-width: 120px;
 
   &:first-child {
     text-align: left;
@@ -88,6 +89,7 @@ const TableData = styled.p`
   text-align: center;
   background: var(--background-white);
   text-transform: uppercase;
+  min-width: 120px;
 
   &:first-child {
     text-align: left;

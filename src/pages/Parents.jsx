@@ -1,50 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 import { Heading, PageContainer } from "../components/reusable";
-import students_list from "../constants/student-list.json";
-import useFetch from "../hooks/useFetch";
 import { Spinner } from "../components/reusable";
+import useFetch from "../hooks/useFetch";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-const Students = () => {
-  const { pending, error, data } = useFetch(`${BASE_URL}/student`);
+const Parents = () => {
+  const { pending, error, data } = useFetch(`${BASE_URL}/parent`);
 
   return (
     <PageContainer>
-      <Heading>Students</Heading>
+      <Heading>Parents</Heading>
       {pending ? (
         <Spinner size={"EXTRA-SMALL"} />
       ) : (
-        <StudentsTableContainer>
+        <ParentsTableContainer>
           {!error && (
-            <StudentsTableLayout>
-              <StudentsTableColumnLayout style={{ position: "sticky", top: 0 }}>
+            <ParentsTableLayout>
+              <ParentsTableColumnLayout style={{ position: "sticky", top: 0 }}>
                 <TableHeading>Name</TableHeading>
-                <TableHeading>Classroom</TableHeading>
-                <TableHeading>Grade</TableHeading>
-              </StudentsTableColumnLayout>
-              {data.records.map(({ studentName, grade, classroom, _id }) => (
-                <StudentsTableColumnLayout data-id={_id}>
-                  <TableData>{studentName}</TableData>
-                  <TableData>{classroom}</TableData>
-                  <TableData>{grade}</TableData>
-                </StudentsTableColumnLayout>
+                <TableHeading>Email</TableHeading>
+                <TableHeading>Phone Number</TableHeading>
+              </ParentsTableColumnLayout>
+              {data.records.map(({ name, email, phoneNumber, _id }) => (
+                <ParentsTableColumnLayout data-id={_id}>
+                  <TableData>{name}</TableData>
+                  <TableData>{email}</TableData>
+                  <TableData>{phoneNumber}</TableData>
+                </ParentsTableColumnLayout>
               ))}
-              {/* <StudentsTableColumnLayout>
-            <TableData>John Doe</TableData>
-            <TableData>NLT-A</TableData>
-            <TableData>100 LEVEL</TableData>
-          </StudentsTableColumnLayout> */}
-            </StudentsTableLayout>
+            </ParentsTableLayout>
           )}
-        </StudentsTableContainer>
+        </ParentsTableContainer>
       )}
     </PageContainer>
   );
 };
 
-const StudentsTableContainer = styled.div`
+const ParentsTableContainer = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -52,7 +46,7 @@ const StudentsTableContainer = styled.div`
   border: 2px solid var(--semi-white);
 `;
 
-const StudentsTableLayout = styled.div`
+const ParentsTableLayout = styled.div`
   display: grid;
   grid-template-rows: max-content;
   grid-auto-rows: max-content;
@@ -62,10 +56,9 @@ const StudentsTableLayout = styled.div`
   overflow: auto;
 `;
 
-const StudentsTableColumnLayout = styled.div`
+const ParentsTableColumnLayout = styled.div`
   display: grid;
-  grid-template-columns: 1fr 280px 220px;
-
+  grid-template-columns: repeat(3, 1fr);
   &:not(:last-child) {
     border-bottom: 2px solid var(--semi-white);
   }
@@ -90,7 +83,7 @@ const TableData = styled.p`
   padding: 1rem;
   text-align: center;
   background: var(--background-white);
-  text-transform: uppercase;
+  //   text-transform: uppercase;
   min-width: 120px;
 
   &:first-child {
@@ -102,4 +95,4 @@ const TableData = styled.p`
     border-right: 2px solid var(--semi-white);
   }
 `;
-export default Students;
+export default Parents;
