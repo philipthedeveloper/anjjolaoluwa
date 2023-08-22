@@ -1,59 +1,137 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Heading, PageContainer } from "../components/reusable";
+import { Heading, PageContainer, Spinner } from "../components/reusable";
 import chat from "../constants/chat-data.json";
 import avatar from "../assets/avatar.png";
+import { useLocation } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
+import { useUserContext } from "../context/UserContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Chat = () => {
   const [message, setMessage] = useState("");
+  const location = useLocation();
+  const [chatId, setChatId] = useState(
+    () => location.pathname.split("/").reverse()[0].trim() || ""
+  );
+  const [to, setTo] = useState("");
+  const { pending, error, data } = useFetch(`${BASE_URL}/chat/${chatId}`);
+  const { user } = useUserContext();
+  const [messages, setMessages] = useState([]);
 
   const handleMessage = (e) => {
     setMessage(e.target.value);
   };
 
+  const sendMessage = (e) => {
+    e.preventDefault();
+    if (!message) return;
+    const newMessage = {
+      chatId,
+      to,
+      content: message,
+    };
+    postMessage(newMessage);
+  };
+
+  const postMessage = async (newMessage) => {
+    setMessage("");
+    try {
+      let response = await axios.post(`${BASE_URL}/chat`, newMessage, {
+        withCredentials: true,
+      });
+      if ([200, 201].includes(response.status)) {
+        setMessages(response.data.chat.messages);
+        setChatId(response?.data?.chat._id);
+        if (data?.chat?.createadBy === user.userId) {
+          setTo(response?.data?.chat.conversationWith);
+        } else {
+          setTo(response?.data?.chat.createdBy);
+        }
+      } else {
+        return toast.info(response?.data?.message || "An error occured");
+      }
+    } catch (error) {
+      return toast.info(error?.response?.data?.message || "An error occured");
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      setMessages(data?.chat.messages);
+      setChatId(data?.chat._id);
+      if (data?.chat?.createadBy === user.userId) {
+        setTo(data?.chat.conversationWith);
+      } else {
+        setTo(data?.chat.createdBy);
+      }
+    }
+  }, [data, pending]);
+
   return (
-    <PageContainer>
-      <Heading>Chat</Heading>
-      <ChatHeader>
-        <ReceiverProfileImageContainer>
-          <ReceiverProfileImage src={avatar} />
-        </ReceiverProfileImageContainer>
-        <ReceiverDetails>
-          <ReceiversName>{chat.parent}</ReceiversName>
-          <AccountType>Parent Account</AccountType>
-        </ReceiverDetails>
-      </ChatHeader>
-      <ChatsContainer>
-        {chat.conversation.map((message) => {
-          if (message.type === "sent") {
-            return (
-              <SentMessage>
-                <MessageContent>{message.content}</MessageContent>
-                <TimeStamp>{message.time}</TimeStamp>
-              </SentMessage>
-            );
-          } else {
-            return (
-              <ReceivedMessage>
-                <MessageContent>{message.content}</MessageContent>
-                <TimeStamp>{message.time}</TimeStamp>
-              </ReceivedMessage>
-            );
-          }
-        })}
-      </ChatsContainer>
-      <Footer>
-        <TextBox
-          type="text"
-          placeholder="Message"
-          value={message}
-          onChange={(e) => handleMessage(e)}
-          name="message"
-        />
-        <SendButton>
-          <i className="fi fi-sr-paper-plane"></i>
-        </SendButton>
-      </Footer>
+    <PageContainer style={{ padding: 0 }}>
+      {/* <Heading>Chat</Heading> */}
+      {pending ? (
+        <Spinner size="EXTRA-SMALL" />
+      ) : (
+        <>
+          <ChatHeader>
+            <ReceiverProfileImageContainer>
+              <ReceiverProfileImage src={avatar} />
+            </ReceiverProfileImageContainer>
+            <ReceiverDetails>
+              <ReceiversName>
+                {user.name === data?.chat.senderName
+                  ? data?.chat.recipientName
+                  : data?.chat.senderName}
+              </ReceiversName>
+              <AccountType>
+                {user.name === data?.chat.senderName
+                  ? data?.chat.recipientAccountType
+                  : data?.chat.senderAccountType}
+              </AccountType>
+            </ReceiverDetails>
+          </ChatHeader>
+          <ChatsContainer>
+            {messages.map((message) => {
+              if (message.from === user?.userId) {
+                return (
+                  <SentMessage key={Object.values(message).join(",")}>
+                    <MessageContent>{message.content}</MessageContent>
+                    <TimeStamp>
+                      {new Date(message.createdAt).toUTCString()}
+                    </TimeStamp>
+                  </SentMessage>
+                );
+              } else {
+                return (
+                  <ReceivedMessage key={Object.values(message).join(",")}>
+                    <MessageContent>{message.content}</MessageContent>
+                    <TimeStamp>
+                      {new Date(message.createdAt).toUTCString()}
+                    </TimeStamp>
+                  </ReceivedMessage>
+                );
+              }
+            })}
+          </ChatsContainer>
+          <Footer>
+            <TextBox
+              type="text"
+              placeholder="Message"
+              value={message}
+              onChange={(e) => handleMessage(e)}
+              name="message"
+            />
+            <SendButton onClick={(e) => sendMessage(e)}>
+              <i className="fi fi-sr-paper-plane"></i>
+            </SendButton>
+          </Footer>
+        </>
+      )}
     </PageContainer>
   );
 };
@@ -68,14 +146,16 @@ const ChatHeader = styled.header`
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  margin: 1rem 0;
+  margin: 0 0 1rem 0;
+  background: var(--white);
+  padding: 1rem;
 `;
 const ReceiverProfileImageContainer = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 50%;
   overflow: hidden;
-  background-color: var(--semi-white);
+  background-color: var(--background-white);
 `;
 const ReceiverProfileImage = styled.img`
   width: 100%;
@@ -84,7 +164,8 @@ const ReceiverProfileImage = styled.img`
 `;
 const ReceiverDetails = styled.div``;
 const ReceiversName = styled.p`
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.2rem;
 `;
 const AccountType = styled.p`
   font-size: 0.8rem;
@@ -96,6 +177,7 @@ const ChatsContainer = styled.div`
   height: 100%;
   overflow: auto;
   flex-direction: column;
+  padding: 1rem;
   padding-bottom: 150px;
 `;
 
@@ -130,10 +212,10 @@ const MessageContent = styled.p`
 `;
 
 const TimeStamp = styled.p`
-  font-size: 0.75rem;
-  color: gray;
+  font-size: 0.6rem;
+  color: #000;
   font-weight: 600;
-  margin-top: 0.8rem;
+  margin-top: 0.5rem;
   text-align: right;
 `;
 

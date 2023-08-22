@@ -72,6 +72,8 @@ const MainDashboard = () => {
                       ? data?.students
                       : title === "Total teachers"
                       ? data?.teachers
+                      : title === "Total parents"
+                      ? data?.parents
                       : count}
                   </HeadingCardCount>
                 </HeadingCardDetailsContainer>
@@ -112,6 +114,8 @@ const DashboardContainer = styled.div`
   //   background: red;
   height: 100%;
   overflow: hidden;
+  overflow-y: auto;
+  transition: 0.4s ease;
 `;
 
 const Heading = styled.h1``;
@@ -154,7 +158,7 @@ const HeadingCardCount = styled.p`
 
 const MainSectionContainer = styled.div`
   flex: 1;
-  overflow: hidden;
+  overflow: auto;
 `;
 
 const MainSectionLayoutContainer = styled.div`
@@ -164,6 +168,12 @@ const MainSectionLayoutContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   grid-auto-rows: 1fr;
+
+  @media (max-width: 792px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 450px;
+    grid-auto-rows: 450px;
+  }
 `;
 
 const StudentStatisticsContainer = styled.div`

@@ -15,14 +15,25 @@ const useFetch = (url) => {
           setPending(false);
           return setError("Invalid Url");
         }
-        let response = await axios.get(url);
+        let response = await axios.get(url, { withCredentials: true });
+        console.log(response);
         if (response.status === 200) {
-          toast.update(toastId, {
-            isLoading: false,
-            autoClose: true,
-            type: "success",
-            render: "Data fetched successfully!",
-          });
+          if (response.data?.message?.toLowerCase() !== "user is authorized") {
+            toast.update(toastId, {
+              isLoading: false,
+              autoClose: true,
+              type: "success",
+              render: "Data fetched successfully!",
+            });
+          } else {
+            toast.update(toastId, {
+              isLoading: false,
+              autoClose: true,
+              type: "success",
+              render: "Done...",
+            });
+          }
+
           setData(response.data);
           setError(false);
         } else {
@@ -36,14 +47,15 @@ const useFetch = (url) => {
         }
         setPending(false);
       } catch (error) {
+        console.log(error);
         toast.update(toastId, {
           isLoading: false,
           autoClose: true,
           type: "error",
-          render: response?.data?.message || "An error occured",
+          render: error?.response?.data?.message || "An error occured",
         });
         setPending(false);
-        setError(response?.data?.message || "An error occured");
+        setError(error?.response?.data?.message || "An error occured");
       }
     })();
   }, [url]);

@@ -4,6 +4,10 @@ import background from "../assets/login-background.png";
 import techULogo from "../assets/tech-u-logo.png";
 import { FormGroupComponent } from "../components/reusable";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Login = () => {
   const [details, setDetails] = useState({ username: "", password: "" });
@@ -11,12 +15,62 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    setDetails((prev) => ({ ...prev, [e.target.name]: e.target.vaule }));
+    setDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/dashboard");
+    if (!details.username || !details.password)
+      return toast.warn("Please fill all credentials");
+    if (details.username.length < 3) {
+      return toast.info("Username cannot be less than 3 characters");
+    }
+    if (details.password.length < 8) {
+      return toast.info("Password must be at least 8 characters");
+    }
+    return loginUser(details);
+    // navigate("/dashboard");
+  };
+
+  const loginUser = async (details) => {
+    let toastId = toast.loading("Verifying credential");
+    try {
+      let response = await axios.post(`${BASE_URL}/user/login`, details, {
+        withCredentials: true,
+      });
+      if (response.status === 200 || response.statusText === "OK") {
+        toast.update(toastId, {
+          render: "Login Successfully",
+          isLoading: true,
+        });
+        toast.update(toastId, {
+          isLoading: false,
+          autoClose: true,
+          render: "Redirecting",
+          type: "info",
+        });
+        let tmo = setTimeout(() => {
+          navigate("/dashboard");
+          clearTimeout(tmo);
+        }, 1500);
+      } else {
+        console.log(response);
+        return toast.update(toastId, {
+          render: response.data.message || "An error occured",
+          isLoading: false,
+          autoClose: true,
+        });
+      }
+    } catch (error) {
+      return toast.update(toastId, {
+        render:
+          error?.response?.data?.message ||
+          error?.message ||
+          "An error occured",
+        isLoading: false,
+        autoClose: true,
+      });
+    }
   };
 
   return (
@@ -131,5 +185,11 @@ const SubmitButton = styled.button`
   width: 100%;
   color: #fff;
   margin-top: 1rem;
+  cursor: pointer;
+  transition: 0.4s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 export default Login;

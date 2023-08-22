@@ -50,3 +50,6 @@ html {
 .react-calendar__month-view__days {
   height: calc(100% - 30px);
 }
+
+#portal {
+}

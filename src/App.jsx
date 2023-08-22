@@ -34,9 +34,10 @@ const AppContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: minmax(70px, min-content) 1fr;
   grid-auto-rows: 100%;
   background: var(--background-white);
+  transition: 0.4s ease;
 `;
 
 export default App;
