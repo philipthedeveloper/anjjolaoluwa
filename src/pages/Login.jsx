@@ -9,6 +9,8 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+console.log(BASE_URL);
+
 const Login = () => {
   const [details, setDetails] = useState({ username: "", password: "" });
   const [passwordVisible, setPasswordVisible] = useState(false);
