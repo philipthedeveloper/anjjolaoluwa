@@ -77,6 +77,11 @@ const SideNav = () => {
     sideNavRef.current.classList.toggle("hide");
   };
 
+  const toggleInView = (e) => {
+    // e.preventDefault();
+    sideNavRef.current.classList.toggle("out-of-view");
+  };
+
   const logoutUser = async (e) => {
     e.preventDefault();
     try {
@@ -96,9 +101,10 @@ const SideNav = () => {
     }
   };
   return (
-    <SideNavContainer ref={sideNavRef}>
+    <SideNavContainer ref={sideNavRef} className="hide out-of-view side-nav">
       <Header onClick={(e) => toggleHide(e)}>
-        <i className="fi fi-br-menu-burger"></i>
+        {/* <i className="fi fi-br-menu-burger"></i> */}
+        <i className="fi fi-sr-arrow-small-right"></i>
       </Header>
       <NavList>
         {routes.map(({ path, name, Icon }) => (
@@ -106,6 +112,7 @@ const SideNav = () => {
             to={path}
             key={path + name}
             className={`${currentPath.includes(path) && "active"}`}
+            onClick={(e) => toggleInView(e)}
           >
             {Icon}
             {name}
@@ -119,6 +126,7 @@ const SideNav = () => {
                 to={path}
                 key={path + name}
                 className={`${currentPath.includes(path) && "active"}`}
+                onClick={(e) => toggleInView(e)}
               >
                 {Icon}
                 {name}
@@ -153,6 +161,19 @@ const SideNavContainer = styled.nav`
       padding-left: 25px;
     }
   }
+
+  @media (max-width: 400px) {
+    position: fixed;
+    height: calc(100dvh - 67px);
+    transition: 0.4s ease;
+    transform: translateX(-100%);
+    z-index: 1000;
+
+    &.out-of-view {
+      // left: -100%;
+      transform: translateX(0%);
+    }
+  }
 `;
 
 const Header = styled.header`
@@ -163,6 +184,14 @@ const Header = styled.header`
     font-size: 1.6rem;
     cursor: pointer;
   }
+
+  // i[class*="arrow"] {
+  //   display: none;
+  // }
+
+  // @media (max-width: 400px) {
+
+  // }
 `;
 
 const NavList = styled.ul`

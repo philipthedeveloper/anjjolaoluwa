@@ -112,6 +112,10 @@ export const PageContainer = styled.div`
   flex-direction: column;
   overflow: auto;
   width: 100%;
+
+  @media (max-width: 400px) {
+    grid-column: 1 /-1;
+  }
 `;
 
 import loadingGif from "../assets/loading-gif.gif";

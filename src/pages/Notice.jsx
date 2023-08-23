@@ -31,8 +31,10 @@ const DialogContainer = styled.div`
 
 const DialogHeading = styled.h2`
   margin-bottom: 1rem;
+  text-align: center;
 `;
 const DialogDesciption = styled.p`
   font-size: 0.8rem;
+  text-align: center;
 `;
 export default Notice;
