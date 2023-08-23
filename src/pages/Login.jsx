@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import background from "../assets/login-background.png";
-import techULogo from "../assets/tech-u-logo.png";
+import schoolLogo from "../assets/school-logo.jpg";
 import { FormGroupComponent } from "../components/reusable";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -79,7 +79,7 @@ const Login = () => {
     <PageContainer>
       <FormSectionContainer>
         <LogoContainer>
-          <Logo src={techULogo} />
+          <Logo src={schoolLogo} />
         </LogoContainer>
         <Form>
           <FormGroupComponent
@@ -163,6 +163,8 @@ const FormSectionContainer = styled.div`
 const LogoContainer = styled.div`
   width: 200px;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
 
   @media (max-width: 480px) {
     width: 150px;
@@ -170,9 +172,10 @@ const LogoContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 100%;
+  width: 60%;
   height: auto;
   object-fit: contain;
+  object-position: -4px 4px;
 `;
 
 const Form = styled.form`

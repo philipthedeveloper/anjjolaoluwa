@@ -20,13 +20,13 @@ const Parents = () => {
             <ParentsTableLayout>
               <ParentsTableColumnLayout style={{ position: "sticky", top: 0 }}>
                 <TableHeading>Name</TableHeading>
-                <TableHeading>Email</TableHeading>
+                <TableHeading shouldExlarge={true}>Email</TableHeading>
                 <TableHeading>Phone Number</TableHeading>
               </ParentsTableColumnLayout>
               {data.records.map(({ name, email, phoneNumber, _id }) => (
                 <ParentsTableColumnLayout data-id={_id}>
                   <TableData>{name}</TableData>
-                  <TableData>{email}</TableData>
+                  <TableData shouldExlarge={true}>{email}</TableData>
                   <TableData>{phoneNumber}</TableData>
                 </ParentsTableColumnLayout>
               ))}
@@ -69,6 +69,8 @@ const TableHeading = styled.h3`
   text-align: center;
   background: var(--semi-white);
   min-width: 120px;
+  min-width: ${(props) => (props.shouldExlarge ? "250px" : "120px")};
+  overflow: ${(props) => (props.shouldExlarge ? "scroll" : "auto")};
 
   &:first-child {
     text-align: left;
@@ -85,6 +87,8 @@ const TableData = styled.p`
   background: var(--background-white);
   //   text-transform: uppercase;
   min-width: 120px;
+  min-width: ${(props) => (props.shouldExlarge ? "250px" : "120px")};
+  overflow: ${(props) => (props.shouldExlarge ? "scroll" : "auto")};
 
   &:first-child {
     text-align: left;

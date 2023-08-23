@@ -27,7 +27,7 @@ const cardData = [
     count: "2,000",
   },
   {
-    title: "Staffs",
+    title: "Total Staffs",
     imgUrl: staffsIcon,
     count: "58",
   },
@@ -58,7 +58,7 @@ const MainDashboard = () => {
       {pending ? (
         <Spinner size={"EXTRA-SMALL"} />
       ) : (
-        <>
+        <Container>
           <DashboardHeadingCardContainer>
             {cardData.map(({ title, count, imgUrl }) => (
               <DashboardHeadingCard key={title + count + imgUrl}>
@@ -99,7 +99,7 @@ const MainDashboard = () => {
               </EventCalenderContainer>
             </MainSectionLayoutContainer>
           </MainSectionContainer>
-        </>
+        </Container>
       )}
     </DashboardContainer>
   );
@@ -111,11 +111,15 @@ const DashboardContainer = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  //   background: red;
+  // background: red;
   height: 100%;
   overflow: hidden;
-  overflow-y: auto;
+  // overflow-y: scroll;
   transition: 0.4s ease;
+
+  @media (max-width: 400px) {
+    grid-column: 1 /-1;
+  }
 `;
 
 const Heading = styled.h1``;
@@ -132,7 +136,7 @@ const DashboardHeadingCard = styled.div`
   //   border-radius: 0.8rem;
   background: var(--semi-white);
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 1rem;
   align-items: center;
   transition: 0.4s ease;
@@ -156,9 +160,20 @@ const HeadingCardCount = styled.p`
   text-align: right;
 `;
 
+const Container = styled.div`
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  // background: blue;
+
+  @media (max-width: 792px) {
+    overflow-y: scroll;
+  }
+`;
+
 const MainSectionContainer = styled.div`
   flex: 1;
-  overflow: auto;
 `;
 
 const MainSectionLayoutContainer = styled.div`
