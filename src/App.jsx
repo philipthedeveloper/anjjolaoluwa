@@ -5,8 +5,11 @@ import Router from "./routes/Router";
 import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouterContext } from "./context/RouteContext";
 
 const App = () => {
+  const { currentPath } = useRouterContext();
+
   const toggleInView = (e) => {
     e.preventDefault();
     document.querySelector(".side-nav")?.classList.toggle("out-of-view");
@@ -26,10 +29,13 @@ const App = () => {
         pauseOnHover
         theme="light"
       />
-      <Header onClick={(e) => toggleInView(e)}>
-        <i className="fi fi-br-menu-burger"></i>
-      </Header>
-      <AppContainer>
+      {console.log(currentPath)}
+      {currentPath !== "/" && (
+        <Header onClick={(e) => toggleInView(e)}>
+          <i className="fi fi-br-menu-burger"></i>
+        </Header>
+      )}
+      <AppContainer shouldHavePadding={currentPath !== "/"}>
         <Router />
         {/* <Login /> */}
         {/* <Dashboard /> */}
@@ -70,7 +76,7 @@ const AppContainer = styled.div`
   position: relative;
 
   @media (max-width: 400px) {
-    padding-top: 69px;
+    padding-top: ${(props) => (props.shouldHavePadding ? "69px" : "0px")};
     grid-template-columns: 1fr;
   }
 `;
