@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Router from "./routes/Router";
@@ -7,6 +7,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
+  const toggleInView = (e) => {
+    e.preventDefault();
+    document.querySelector(".side-nav")?.classList.toggle("out-of-view");
+  };
+
   return (
     <>
       <ToastContainer
@@ -21,6 +26,9 @@ const App = () => {
         pauseOnHover
         theme="light"
       />
+      <Header onClick={(e) => toggleInView(e)}>
+        <i className="fi fi-br-menu-burger"></i>
+      </Header>
       <AppContainer>
         <Router />
         {/* <Login /> */}
@@ -30,14 +38,41 @@ const App = () => {
   );
 };
 
+const Header = styled.header`
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  display: none;
+
+  i {
+    color: #fff;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 400px) {
+    display: block;
+  }
+`;
+
 const AppContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   display: grid;
   grid-template-columns: minmax(70px, min-content) 1fr;
   grid-auto-rows: 100%;
   background: var(--background-white);
   transition: 0.4s ease;
+  position: relative;
+
+  @media (max-width: 400px) {
+    padding-top: 69px;
+    grid-template-columns: 1fr;
+  }
 `;
 
 export default App;
